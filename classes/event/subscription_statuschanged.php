@@ -57,7 +57,8 @@ class subscription_statuschanged extends \core\event\base {
      */
     public function get_description() {
         $status = get_string('health_' . $this->other['status'], 'mod_newsletter');
-        return "The user with id '$this->userid' changed the subscription status of the user with id '$this->relateduserid' from the newsletter with the " .
+        return "The user with id '$this->userid' changed the subscription status of the user with id '
+        $this->relateduserid' from the newsletter with the " .
                 "course module id '$this->contextinstanceid' to $status";
     }
 

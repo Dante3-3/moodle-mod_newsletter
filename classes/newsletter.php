@@ -454,7 +454,7 @@ class newsletter implements renderable {
             $a = $data->email;
             $output .= html_writer::div(get_string('guestsubscriptionsuccess', 'newsletter', $a));
             $url = $this->get_url();
-            if(isset($data->embed)) {
+            if (isset($data->embed)) {
                 $url->params(['embed' => $data->embed]);
             }
             $output .= html_writer::link(
@@ -598,7 +598,7 @@ class newsletter implements renderable {
                 $output .= html_writer::link($url, $text, ['class' => 'btn btn-primary m-2']);
             }
         } else {
-            if (!empty($CFG->registerauth) and is_enabled_auth('email')) {
+            if (!empty($CFG->registerauth) && is_enabled_auth('email')) {
                 $guestsignuppossible = true;
             } else {
                 $guestsignuppossible = false;

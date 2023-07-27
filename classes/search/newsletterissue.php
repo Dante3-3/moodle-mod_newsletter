@@ -35,7 +35,7 @@ defined('MOODLE_INTERNAL') || die();
  */
 class newsletterissue extends \core_search\base {
 
-    private array $data = []; // stores data.
+    private array $data = []; // Stores data.
 
     /**
      * Returns recordset containing required data for indexing Newsletter issues.
@@ -80,7 +80,7 @@ class newsletterissue extends \core_search\base {
         $doc->set('title', content_to_text($record->title, false));
         $doc->set('content', content_to_text($record->htmlcontent, FORMAT_HTML));
         $doc->set('contextid', $context->id);
-        // Not associated with a course
+        // Not associated with a course.
         $doc->set('courseid', $course->id);
         $doc->set('owneruserid', \core_search\manager::NO_OWNER_ID);
         $doc->set('modified', $record->timemodified);

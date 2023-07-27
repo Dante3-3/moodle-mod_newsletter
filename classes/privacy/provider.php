@@ -238,5 +238,4 @@ class provider implements
         // Write generic module intro files.
         helper::export_context_files($context, $user);
     }
-
 }

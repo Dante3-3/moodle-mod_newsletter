@@ -373,7 +373,7 @@ class issue_parser {
      */
     public static function replace_lastname($m) {
         global $USER;
-        if (!self::$cron and !isloggedin() or isguestuser()) {
+        if (!self::$cron && !isloggedin() || isguestuser()) {
             return get_string('user');
         }
         if (self::$cron) {
@@ -390,7 +390,7 @@ class issue_parser {
      */
     public static function replace_firstname($m) {
         global $USER;
-        if (!self::$cron and !isloggedin() or isguestuser()) {
+        if (!self::$cron && !isloggedin() || isguestuser()) {
             return get_string('guest');
         }
         if (self::$cron) {
@@ -407,7 +407,7 @@ class issue_parser {
      */
     public static function replace_fullname($m) {
         global $USER;
-        if (!self::$cron and !isloggedin() or isguestuser()) {
+        if (!self::$cron && !isloggedin() || isguestuser()) {
             return get_string('guest') . " " . get_string('user');
         }
         if (self::$cron) {

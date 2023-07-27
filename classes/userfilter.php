@@ -268,7 +268,7 @@ class userfilter {
 
             $operator = $filterobject->operator;
 
-            // Decide wether its a userfield or customuserfield
+            // Decide wether its a userfield or customuserfield.
 
             if (isset($filterobject->pf)) {
 

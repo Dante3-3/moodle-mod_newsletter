@@ -47,34 +47,33 @@ class mod_newsletter_observer {
             JOIN {user_info_field} uif
             ON uif.id = n.profilefield
             JOIN {user_info_data} uid
-            ON uid.fieldid = uif.id 
+            ON uid.fieldid = uif.id
             JOIN {user} u
             ON u.id = uid.userid
             WHERE n.course = :courseid
             AND m.name = 'newsletter'
             AND u.id = :userid";
-            
         $params = array('courseid' => $courseid, 'userid' => $userid);
 
         $newsletters = $DB->get_records_sql($sql, $params);
         foreach ($newsletters as $newsletter) {
-            if($newsletter->subscriptionmode == NEWSLETTER_SUBSCRIPTION_MODE_OPT_OUT || 
+            if ($newsletter->subscriptionmode == NEWSLETTER_SUBSCRIPTION_MODE_OPT_OUT ||
             $newsletter->subscriptionmode == NEWSLETTER_SUBSCRIPTION_MODE_FORCED) {
                 $newsletterobject = mod_newsletter\newsletter::get_newsletter_by_instance($newsletter->id);
                 $newsletterobject->subscribe($userid);
-            } else if($newsletter->subscriptionmode == NEWSLETTER_SUBSCRIPTION_MODE_OPT_IN) {
-                    $newsletterobject = mod_newsletter\newsletter::get_newsletter_by_instance($newsletter->id);
-                    if($newsletter->subscription == 1) {
-                        $newsletterobject->subscribe($userid);
-                    } else {
-                        $subid = $newsletterobject->get_subid($userid);
-                        if($subid) {
-                            $newsletterobject->delete_subscription($subid); 
-                        }
+            } else if ($newsletter->subscriptionmode == NEWSLETTER_SUBSCRIPTION_MODE_OPT_IN) {
+                $newsletterobject = mod_newsletter\newsletter::get_newsletter_by_instance($newsletter->id);
+                if ($newsletter->subscription == 1) {
+                    $newsletterobject->subscribe($userid);
+                } else {
+                    $subid = $newsletterobject->get_subid($userid);
+                    if ($subid) {
+                        $newsletterobject->delete_subscription($subid);
                     }
+                }
             }
         }
-    } 
+    }
 
     /**
      * Triggered via user_created event. Subscribes user to newsletter on frontpage
@@ -96,8 +95,6 @@ class mod_newsletter_observer {
         self::subscribe($user->id, 1);
     }
 
-
-    
     /**
      * Triggered via user_enrolment_deleted event.
      *

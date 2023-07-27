@@ -32,6 +32,8 @@ use stdClass;
 use mod_newsletter\newsletter;
 use moodle_url;
 
+defined('MOODLE_INTERNAL') || die();
+
 require_once($CFG->dirroot . '/mod/newsletter/lib.php');
 
 defined('MOODLE_INTERNAL') || die();
@@ -218,7 +220,7 @@ class send_newsletter extends \core\task\scheduled_task {
                 $tags = $parsedhtml->get_supported_tags();
                 foreach ($tags as $name) {
                     $toreplace[$name] = "news://" . $name . "/";
-                    if ($name == 'lastname' or $name == 'firstname') {
+                    if ($name == 'lastname' || $name == 'firstname') {
                         $replacement[$name] = $recipient->$name;
                     } else if ($name == 'fullname') {
                         $replacement[$name] = fullname($recipient);
@@ -240,7 +242,8 @@ class send_newsletter extends \core\task\scheduled_task {
 
                 $userfrom->customheaders = array( // Headers to make emails easier to track.
                 'Precedence: Bulk',
-                    'List-Id: "' . $newsletter->get_instance()->name . '" <newsletter' . $newsletter->get_course_module()->instance .
+                    'List-Id: "' . $newsletter->get_instance()->name . '" <newsletter' .
+                    $newsletter->get_course_module()->instance .
                                 '@' . $hostname . '>',
                     'List-Help: ' . $CFG->wwwroot . '/mod/newsletter/view.php?id=' . $newsletter->get_context()->instanceid,
                     'Message-ID: ' . newsletter_get_email_message_id($issue->id, $recipient->id,

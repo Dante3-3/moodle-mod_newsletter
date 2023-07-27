@@ -56,7 +56,8 @@ class subscription_unsubscribed extends \core\event\base {
      * @return string
      */
     public function get_description() {
-        return "The user with id '$this->userid' unsubscribed the user with id '$this->relateduserid' from the newsletter with the " .
+        return "The user with id '$this->userid' unsubscribed the user with id '
+        $this->relateduserid' from the newsletter with the " .
                 "course module id '$this->contextinstanceid'.";
     }
 
